@@ -14,7 +14,7 @@
     <style>
         html, body {
             background-color: #fff;
-            color: #636b6f;
+            color: #2d3032;
             font-family: 'Raleway', sans-serif;
             font-weight: 100;
             height: 100vh;
@@ -50,7 +50,7 @@
         }
 
         .links > a {
-            color: #636b6f;
+            color: #393e40;
             padding: 0 25px;
             font-size: 12px;
             font-weight: 600;
@@ -65,8 +65,6 @@
     </style>
 </head>
 <body>
-<a href="{{ route('user.change-language', ['en']) }}">English</a>
-<a href="{!! route('user.change-language', ['vi']) !!}">Vietnam</a>
 <div class="flex-center position-ref full-height">
     @if (Route::has('login'))
         <div class="top-right links">
@@ -78,31 +76,35 @@
             @endauth
         </div>
     @endif
-
         <div class="content">
-            <div class="title m-b-md">
-                {{ __('language.blog_application') }}
-            </div>
-
             <div class="links">
-                <a href="{!! route('user.change-language', ['en']) !!}">English</a>
-                <a href="{!! route('user.change-language', ['vi']) !!}">Vietnam</a>
-                <a href="{!! route('posts.list') !!} "> {!! __('language.list_post') !!}</a>
+                <a href="{!! route('home') !!} "> {!! __('language.home') !!}</a>
                 <a href="{!! route('posts.create') !!} "> {!! __('language.create_post') !!}</a>
             </div>
+            @if (count($posts) == 0)
+                <p>{!! __('language.post_not_exist') !!}</p>
+            @else
+                <ul>
+                    @foreach($posts as $post)
+                        <li>{{$post->title}}</li>
+                    @endforeach
+                </ul>
+            @endif
         </div>
-
 {{--    <div class="content">--}}
-{{--        <div class="title m-b-md">--}}
-{{--            Ứng dụng Blog--}}
-{{--        </div>--}}
-{{--        --}}
 {{--        <div class="links">--}}
-{{--            <a href="{!! route('user.change-language', ['en']) !!}">English</a>--}}
-{{--            <a href="{!! route('user.change-language', ['vi']) !!}">Vietnam</a>--}}
-{{--            <a href="{!! route('posts.list') !!} "> Danh sách bài viết</a>--}}
-{{--            <a href="{!! route('posts.create') !!} ">Tạo mới bài viết</a>--}}
+{{--            <a href="{!! route('home') !!} "> Trang chủ</a>--}}
+{{--            <a href="{!! route('posts.create') !!} "> Tạo bài viết</a>--}}
 {{--        </div>--}}
+{{--        @if (count($posts) == 0)--}}
+{{--            <p>Không có bài viết nào</p>--}}
+{{--        @else--}}
+{{--            <ul>--}}
+{{--                @foreach($posts as $post)--}}
+{{--                    <li>{{$post->title}}</li>--}}
+{{--                @endforeach--}}
+{{--            </ul>--}}
+{{--        @endif--}}
 {{--    </div>--}}
 </div>
 </body>
